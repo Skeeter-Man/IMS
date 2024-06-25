@@ -1,4 +1,5 @@
 ﻿using IMS.CoreBusiness;
+using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IMS.UseCases.Inventories
 {
-    public class ViewInventoriesByNameUseCases
+    public class ViewInventoriesByNameUseCases : IViewInventoriesByNameUseCases
     {
         private readonly IInventoryRepository _inventoryRepository;
 
