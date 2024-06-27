@@ -3,6 +3,7 @@ using IMS.UseCases.Inventories;
 using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
 using IMS.WebApp.Components;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 
 builder.Services.AddTransient<IViewInventoriesByNameUseCases, ViewInventoriesByNameUseCases>();
 builder.Services.AddTransient<IAddInventoryUserCase, AddInventoryUserCase>();
+builder.Services.AddTransient<IEditInventoryUseCase, EditInventoryUseCase>();
 
 var app = builder.Build();
 
