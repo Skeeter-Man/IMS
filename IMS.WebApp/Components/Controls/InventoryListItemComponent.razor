@@ -1,4 +1,6 @@
-﻿
+﻿@inject IDeleteInventoryByIdUseCase DeleteInventoryByIdUseCase
+@inject NavigationManager NavigationManager
+
 @if (Inventory is not null)
 {
     <tr>
@@ -6,10 +8,18 @@
         <td>@Inventory.Quantity</td>
         <td>@Inventory.Price</td>
         <td>
-            <a class="btn btn-light"
+            <a class="btn btn-primary"
                href="/editinventory/@Inventory.InventoryId">
                 Edit
             </a>
+        </td>
+        <td>
+            <EditForm Model="Inventory"
+                      Enhance="true"
+                      FormName="@($"form-delete-inventory-{Inventory.InventoryId}")"
+                      OnValidSubmit="() => DeleteInventory(Inventory.InventoryId)">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </EditForm>
         </td>
     </tr>
 }
@@ -17,4 +27,10 @@
 @code {
     [Parameter]
     public Inventory? Inventory { get; set; }
+
+    private async Task DeleteInventory(int inventoryId)
+    {
+        await DeleteInventoryByIdUseCase.ExecuteAsync(inventoryId);
+        NavigationManager.Refresh();
+    }
 }

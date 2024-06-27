@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace IMS.UseCases.Inventories
 {
-    public class DeleteInventoryUseCase : IDeleteInventoryUseCase
+    public class DeleteInventoryByIdUseCase : IDeleteInventoryByIdUseCase
     {
         private readonly IInventoryRepository _inventoryRepository;
 
-        public DeleteInventoryUseCase(IInventoryRepository inventoryRepository)
+        public DeleteInventoryByIdUseCase(IInventoryRepository inventoryRepository)
         {
             _inventoryRepository = inventoryRepository;
         }
 
-        public async Task ExecuteAsync(Inventory inventory)
+        public async Task ExecuteAsync(int inventoryId)
         {
-            await _inventoryRepository.DeleteInventoryByIdAsync(inventory);
+            await _inventoryRepository.DeleteInventoryByIdAsync(inventoryId);
         }
     }
 }

@@ -17,7 +17,7 @@ builder.Services.AddTransient<IAddInventoryUserCase, AddInventoryUserCase>();
 builder.Services.AddTransient<IEditInventoryUseCase, EditInventoryUseCase>();
 builder.Services.AddTransient<IAddInventoryUserCase, AddInventoryUserCase>();
 builder.Services.AddTransient<IViewInventoryByIdUseCase, ViewInventoryByIdUseCase>();
-builder.Services.AddTransient<IDeleteInventoryUseCase, DeleteInventoryUseCase>();
+builder.Services.AddTransient<IDeleteInventoryByIdUseCase, DeleteInventoryByIdUseCase>();
 
 var app = builder.Build();
 

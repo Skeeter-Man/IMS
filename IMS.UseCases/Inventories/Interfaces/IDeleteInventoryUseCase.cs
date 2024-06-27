@@ -2,8 +2,8 @@
 
 namespace IMS.UseCases.Inventories
 {
-    public interface IDeleteInventoryUseCase
+    public interface IDeleteInventoryByIdUseCase
     {
-        Task ExecuteAsync(Inventory inventory);
+        Task ExecuteAsync(int inventoryId);
     }
 }
