@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace IMS.UseCases.Inventories
 {
-    public class AddInventoryUserCase : IAddInventoryUserCase
+    public class ViewInventoryByIdUseCase : IViewInventoryByIdUseCase
     {
         private readonly IInventoryRepository _inventoryRepository;
 
-        public AddInventoryUserCase(IInventoryRepository inventoryRepository)
+        public ViewInventoryByIdUseCase(IInventoryRepository inventoryRepository)
         {
             _inventoryRepository = inventoryRepository;
         }
 
-        public async Task ExecuteAsync(Inventory inventory)
+        public async Task<Inventory> ExecuteAsync(int inventoryId)
         {
-            await _inventoryRepository.AddInventoryAsync(inventory);
+            return await _inventoryRepository.GetInventoryById(inventoryId);
         }
     }
 }
