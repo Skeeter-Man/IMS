@@ -1,6 +1,7 @@
 ﻿@page "/addinventory"
 
 @inject IAddInventoryUserCase AddInventoryUserCase
+@inject NavigationManager NavigationManager
 
 <h3>Add Inventory</h3>
 <br />
@@ -36,7 +37,8 @@
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Save</button>
-
+    &nbsp;
+    <a href="/inventories" class="btn btn-warning">Cancel</a>
 </EditForm>
 
 @code {
@@ -46,5 +48,6 @@
     public async Task Save()
     {
         await AddInventoryUserCase.ExecuteAsync(inventory);
+        NavigationManager.NavigateTo("/inventories");
     }
 }
