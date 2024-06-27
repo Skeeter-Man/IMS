@@ -14,7 +14,7 @@ builder.Services.AddRazorComponents();
 builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 
-builder.Services.AddTransient<IViewInventoriesByNameUseCases, ViewProductsByNameUseCases>();
+builder.Services.AddTransient<IViewInventoriesByNameUseCases, ViewInventoriesByNameUseCases>();
 builder.Services.AddTransient<IAddInventoryUserCase, AddInventoryUserCase>();
 builder.Services.AddTransient<IEditInventoryUseCase, EditInventoryUseCase>();
 builder.Services.AddTransient<IAddInventoryUserCase, AddInventoryUserCase>();
