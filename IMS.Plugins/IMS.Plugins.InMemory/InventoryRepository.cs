@@ -21,13 +21,13 @@ namespace IMS.Plugins.InMemory
         {
             if (_inventories.Any(x => x.InventoryName.Equals(inventory.InventoryName, StringComparison.OrdinalIgnoreCase)))
             { return Task.CompletedTask; }
-            
+
             var maxId = _inventories.Max(x => x.InventoryId);
             inventory.InventoryId = maxId;
 
             _inventories.Add(inventory);
 
-            return Task.CompletedTask;  
+            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<Inventory>> GetInventoriesByNameAsync(string name)
@@ -39,7 +39,18 @@ namespace IMS.Plugins.InMemory
 
         public Task UpdateInventoryAsync(Inventory inventory)
         {
-            throw new NotImplementedException();
+            if (_inventories.Any(x => x.InventoryId != inventory.InventoryId &&
+                x.InventoryName.Equals(inventory.InventoryName, StringComparison.OrdinalIgnoreCase)))
+                return Task.CompletedTask;
+
+            var invToUpdate = _inventories.FirstOrDefault(x => x.InventoryId == inventory.InventoryId);
+            if (invToUpdate != null)
+            {
+                invToUpdate.InventoryName = inventory.InventoryName;
+                invToUpdate.Quantity = inventory.Quantity;
+                invToUpdate.Price = inventory.Price;
+            }
+            return Task.CompletedTask;
         }
     }
 }

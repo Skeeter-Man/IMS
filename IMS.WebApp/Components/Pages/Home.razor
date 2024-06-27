@@ -1,6 +1,7 @@
 ﻿@page "/"
 
 @inject IViewInventoriesByNameUseCases ViewInventoryByNameCase
+@inject IEditInventoryUseCase EditInventoryUseCase
 
 <PageTitle>Test Page</PageTitle>
 <br />
@@ -12,7 +13,7 @@
         foreach (var inv in inventories)
         {
             <li>
-            @inv.InventoryName @inv.Quantity @inv.Price
+                @inv.InventoryName @inv.Quantity @inv.Price
             </li>
         }
     }
@@ -24,6 +25,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        var inventory = new Inventory { InventoryId = 1, InventoryName = "Bike Seat", Quantity = 50, Price = 3 };
+        await EditInventoryUseCase.ExecuteAsync(inventory);
+
         inventories = (await ViewInventoryByNameCase.ExecuteAsyn()).ToList();
     }
 
