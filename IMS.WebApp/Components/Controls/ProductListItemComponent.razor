@@ -1,4 +1,6 @@
-﻿@inject                 NavigationManager NavigationManager
+﻿@inject NavigationManager NavigationManager
+@inject IDeleteProductByIdUseCase DeleteProductByIdUseCase
+@inject IJSRuntime JSRuntime
 
 @if (Product is not null)
 {
@@ -13,6 +15,11 @@
             </a>
         </td>
         <td>
+            <button type="button"
+                    class="btn btn-danger"
+                    @onclick="async () => { await HandleDelete(Product.ProductId); }">
+                Delete
+            </button>
         </td>
     </tr>
 }
@@ -21,5 +28,18 @@
     [Parameter]
     public Product? Product { get; set; }
 
+    private async Task HandleDelete(int productId)
+    {
+        if (Product is not null)
+        {
+            bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to delete {Product.ProductName}");
+
+            if (confirm)
+            {
+                await DeleteProductByIdUseCase.ExecuteAsync(productId);
+                this.Product = null;
+            }
+        }
+    }
 
 }
