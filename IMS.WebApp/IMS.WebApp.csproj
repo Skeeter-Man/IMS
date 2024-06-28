@@ -11,6 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Components\Controls\Common\AutoCompleteComponent.razor.css" />
+    <None Remove="Components\Controls\SearchProductInventoryComponent.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\IMS.CoreBusiness\IMS.CoreBusiness.csproj" />
     <ProjectReference Include="..\IMS.Plugins\IMS.Plugins.InMemory\IMS.Plugins.InMemory.csproj" />
     <ProjectReference Include="..\IMS.UseCases\IMS.UseCases.csproj" />
@@ -22,6 +27,11 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Components\Pages\AddInventory.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\Controls\Common\AutoCompleteComponent.razor.css" />
+    <Content Include="Components\Controls\SearchProductInventoryComponent.razor.css" />
   </ItemGroup>
 
 </Project>

@@ -37,9 +37,6 @@ builder.Services.AddTransient<IDeleteProductByIdUseCase, DeleteProductByIdUseCas
 // Activity Use Cases
 builder.Services.AddTransient<IPurchaseInventoryUseCase, PurchaseInventoryUseCase>();
 
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
