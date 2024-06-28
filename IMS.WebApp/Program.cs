@@ -17,13 +17,13 @@ builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 
 builder.Services.AddTransient<IViewInventoriesByNameUseCases, ViewInventoriesByNameUseCases>();
-builder.Services.AddTransient<IAddInventoryUserCase, AddInventoryUserCase>();
-builder.Services.AddTransient<IEditInventoryUseCase, EditInventoryUseCase>();
-builder.Services.AddTransient<IAddInventoryUserCase, AddInventoryUserCase>();
 builder.Services.AddTransient<IViewInventoryByIdUseCase, ViewInventoryByIdUseCase>();
+builder.Services.AddTransient<IAddInventoryUseCase, AddInventoryUseCase>();
+builder.Services.AddTransient<IEditInventoryUseCase, EditInventoryUseCase>();
 builder.Services.AddTransient<IDeleteInventoryByIdUseCase, DeleteInventoryByIdUseCase>();
 
 builder.Services.AddTransient<IViewProductsByNameUseCases, ViewProductsByNameUseCases>();
+builder.Services.AddTransient<IAddProductUseCase, AddProductUserCase>();
 builder.Services.AddTransient<IDeleteProductByIdUseCase, DeleteProductByIdUseCase>();
 
 

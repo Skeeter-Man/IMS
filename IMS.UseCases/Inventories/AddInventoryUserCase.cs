@@ -1,19 +1,15 @@
 ﻿using IMS.CoreBusiness;
 using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IMS.UseCases.Products.Interfaces;
 
-namespace IMS.UseCases.Inventories
+namespace IMS.UseCases.Products
 {
-    public class AddInventoryUserCase : IAddInventoryUserCase
+    public class AddInventoryUseCase : IAddInventoryUseCase
     {
         private readonly IInventoryRepository _inventoryRepository;
 
-        public AddInventoryUserCase(IInventoryRepository inventoryRepository)
+        public AddInventoryUseCase(IInventoryRepository inventoryRepository)
         {
             _inventoryRepository = inventoryRepository;
         }

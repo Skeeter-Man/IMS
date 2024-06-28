@@ -2,7 +2,7 @@
 
 namespace IMS.UseCases.Inventories.Interfaces
 {
-    public interface IAddInventoryUserCase
+    public interface IAddInventoryUseCase
     {
         Task ExecuteAsync(Inventory inventory);
     }
