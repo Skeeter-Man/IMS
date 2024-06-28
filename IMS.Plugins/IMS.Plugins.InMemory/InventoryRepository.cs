@@ -55,7 +55,7 @@ namespace IMS.Plugins.InMemory
             return _inventories.Where(x => x.InventoryName.Contains(name, StringComparison.OrdinalIgnoreCase));
         }
 
-        public async Task<Inventory> GetInventoryById(int inventoryId)
+        public async Task<Inventory> GetInventoryByIdAsync(int inventoryId)
         {
             var inv = _inventories.First(x=>x.InventoryId == inventoryId);
             var newInv = new Inventory

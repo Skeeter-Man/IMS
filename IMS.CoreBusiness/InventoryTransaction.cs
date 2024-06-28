@@ -13,6 +13,7 @@ namespace IMS.CoreBusiness
         
         [Required]
         public string PONumber { get; set; } = string.Empty;
+        public string ProductionNumber { get; set; } = string.Empty;
 
         [Required]
         public int InventoryId { get; set; }
@@ -21,7 +22,7 @@ namespace IMS.CoreBusiness
         public int QuantityBefore { get; set; }
 
         [Required]
-        public IventoryTransactionType ActivityType { get; set; }
+        public InventoryTransactionType ActivityType { get; set; }
 
         [Required]
         public int QuantityAfter { get; set; }

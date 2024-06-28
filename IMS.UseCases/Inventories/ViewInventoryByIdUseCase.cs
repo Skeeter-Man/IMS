@@ -20,7 +20,7 @@ namespace IMS.UseCases.Inventories
 
         public async Task<Inventory> ExecuteAsync(int inventoryId)
         {
-            return await _inventoryRepository.GetInventoryById(inventoryId);
+            return await _inventoryRepository.GetInventoryByIdAsync(inventoryId);
         }
     }
 }
