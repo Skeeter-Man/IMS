@@ -13,7 +13,8 @@
         <ul>
             @foreach (var inv in inventories)
             {
-                <li @key="inv.InventoryId">
+                <li @key="inv.InventoryId"
+                    @onclick="() => { HandleSelectInventory(inv); }">
                     @inv.InventoryName
                 </li>
             }
@@ -21,7 +22,27 @@
     </div>
 }
 
+<style>
+    .search-result {
+        overflow-y: auto;
+        max-height: 300px;
+        border: 1px solid silver;
+        padding-top: 10px;
+    }
+
+    div ul {
+        list-style-type: none;
+    }
+
+        div ul li {
+            cursor: pointer;
+        }
+</style>
+
 @code {
+    [Parameter]
+    public EventCallback<Inventory> OnInventorySelected { get; set; }
+
     private string _searchFilter;
     private string searchFilter
     {
@@ -41,21 +62,10 @@
 
         StateHasChanged();
     }
+
+    private async Task HandleSelectInventory(Inventory inventory)
+    {
+        await OnInventorySelected.InvokeAsync(inventory);
+        inventories.Clear();
+    }
 }
-<style>
-    .search-result {
-        overflow-y: auto;
-        max-height: 300px;
-        border: 1px solid silver;
-        padding-top: 10px;
-    }
-
-    div ul {
-        list-style-type: none;
-    }
-
-        div ul li {
-            cursor: pointer;
-        }
-
-</style>

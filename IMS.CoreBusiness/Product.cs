@@ -16,9 +16,34 @@ namespace IMS.CoreBusiness
         public string ProductName { get; set; } = string.Empty;
 
         [Range(0, int.MaxValue, ErrorMessage = "Quantity must be greater or equal to 0.")]
-        public int Quantity { get; set; }      
-        
+        public int Quantity { get; set; }
+
         [Range(0, int.MaxValue, ErrorMessage = "Price must be greater or equal to 0.")]
         public int Price { get; set; }
+        
+        public List<ProductInventory> ProductInventories { get; set; } = new List<ProductInventory>();
+
+        public void AddInventory(Inventory inventory)
+        {
+            if (!this.ProductInventories.Any(
+                x => x.Inventory is not null && 
+                x.Inventory.InventoryId.Equals(inventory.InventoryName)))
+            {
+                this.ProductInventories.Add(new ProductInventory
+                {
+                    InventoryId = inventory.InventoryId,
+                    Inventory = inventory,
+                    InventoryQuantity = 1,
+                    ProductId = this.ProductId,
+                    Product = this
+                });
+            }
+        }
+
+        public void RemoveInventory(ProductInventory productInventory)
+        {
+            this.ProductInventories?.Remove(productInventory);
+        }
+
     }
 }
