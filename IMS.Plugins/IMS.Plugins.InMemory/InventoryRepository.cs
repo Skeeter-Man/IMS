@@ -22,8 +22,15 @@ namespace IMS.Plugins.InMemory
             if (_inventories.Any(x => x.InventoryName.Equals(inventory.InventoryName, StringComparison.OrdinalIgnoreCase)))
             { return Task.CompletedTask; }
 
-            var maxId = _inventories.Max(x => x.InventoryId);
-            inventory.InventoryId = maxId;
+            if (_inventories.Count() > 0)
+            {
+                inventory.InventoryId = _inventories.Max(x => x.InventoryId);
+            }
+            else
+            {
+                inventory.InventoryId = 1;
+            }
+
 
             _inventories.Add(inventory);
 
@@ -50,7 +57,7 @@ namespace IMS.Plugins.InMemory
 
         public async Task<Inventory> GetInventoryById(int inventoryId)
         {
-            return await Task.FromResult(_inventories.First( x=> x.InventoryId == inventoryId));
+            return await Task.FromResult(_inventories.First(x => x.InventoryId == inventoryId));
 
         }
 

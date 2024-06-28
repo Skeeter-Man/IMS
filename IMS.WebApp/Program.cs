@@ -2,6 +2,7 @@ using IMS.Plugins.InMemory;
 using IMS.UseCases.Inventories;
 using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
+using IMS.UseCases.Products;
 using IMS.UseCases.Products.Interfaces;
 using IMS.WebApp.Components;
 using System.Threading.RateLimiting;
@@ -22,6 +23,7 @@ builder.Services.AddTransient<IViewInventoryByIdUseCase, ViewInventoryByIdUseCas
 builder.Services.AddTransient<IDeleteInventoryByIdUseCase, DeleteInventoryByIdUseCase>();
 
 builder.Services.AddTransient<IViewProductsByNameUseCases, ViewProductsByNameUseCases>();
+
 
 var app = builder.Build();
 

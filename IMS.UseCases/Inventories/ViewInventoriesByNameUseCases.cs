@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace IMS.UseCases.Inventories
 {
-    public class ViewProductsByNameUseCases : IViewInventoriesByNameUseCases
+    public class ViewInventoriesByNameUseCases : IViewInventoriesByNameUseCases
     {
         private readonly IInventoryRepository _inventoryRepository;
 
-        public ViewProductsByNameUseCases(IInventoryRepository inventoryRepository)
+        public ViewInventoriesByNameUseCases(IInventoryRepository inventoryRepository)
         {
             _inventoryRepository = inventoryRepository;
         }
