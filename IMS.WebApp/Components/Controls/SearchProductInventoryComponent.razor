@@ -57,7 +57,7 @@
 
     private async Task HandleSearch()
     {
-        await Task.Delay(1000); // simulate long running call
+        //await Task.Delay(1000); // simulate long running call
         inventories = (await ViewInventoriesByNameUseCase.ExecuteAsyn(this.searchFilter)).ToList();
 
         StateHasChanged();
