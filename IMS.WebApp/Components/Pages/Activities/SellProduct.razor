@@ -1,28 +1,27 @@
-﻿@page "/produce"
+﻿@page "/sell"
 
 @rendermode InteractiveServer
 
 @inject IJSRuntime JSRuntime
-
 @inject IViewProductsByNameUseCases ViewProductsByNameUseCases
 @inject IViewProductByProductIdUseCase ViewProductByIdUseCase
-@inject IProduceProductUseCase ProduceProductUseCase
+@inject ISellProductUseCase SellProductUseCase
 
-<h3>Produce Product</h3>
+<h3>Sell Product</h3>
 <br />
 
-<EditForm id="produce-form" Model="produceViewModel" OnValidSubmit="Produce">
+<EditForm id="sell-form" Model="sellViewModel" OnValidSubmit="Sell">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="form-group">
-        <label for="po">Production #</label>
-        <InputText id="po" @bind-Value="produceViewModel.ProductionNumber" class="form-control" />
+        <label for="po">Sales Order #</label>
+        <InputText id="po" @bind-Value="sellViewModel.SalesOrderNumber" class="form-control" />
     </div>
     <br />
     <div class="card">
         <div class="card-body">
             <div class="form-group">
-                <AutoCompleteComponent Label="Product to Purchase"
+                <AutoCompleteComponent Label="Product to Sell"
                                        SearchFunction="SearchProduct"
                                        OnItemSelected="HandleItemSelected"></AutoCompleteComponent>
             </div>
@@ -31,14 +30,19 @@
     <br />
     <div class="form-group">
         <label for="qty">Quantity</label>
-        <InputNumber id="qty" @bind-Value="produceViewModel.QuantityToProduce" class="form-control" />
+        <InputNumber id="qty" @bind-Value="sellViewModel.QuantityToSell" class="form-control" />
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Purchase</button>
+    <div class="form-group">
+        <label for="price">Unit Price</label>
+        <InputNumber id="price" @bind-Value="sellViewModel.UnitPrice" class="form-control" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Sell</button>
 </EditForm>
 
 @code {
-    private ProduceViewModel produceViewModel = new ProduceViewModel();
+    private SellViewModel sellViewModel = new SellViewModel();
     private Product? selectedProduct;
 
     protected override void OnAfterRender(bool firstRender)
@@ -46,7 +50,7 @@
         base.OnAfterRender(firstRender);
         if (firstRender)
         {
-            JSRuntime.InvokeVoidAsync("preventFormSubmission", "produce-form");
+            JSRuntime.InvokeVoidAsync("preventFormSubmission", "sell-form");
         }
     }
 
@@ -62,20 +66,22 @@
     {
         selectedProduct = await ViewProductByIdUseCase.ExecuteAsync(item.Id);
 
-        this.produceViewModel.ProductId = item.Id;
-        produceViewModel.Product = this.selectedProduct;
+        this.sellViewModel.ProductId = item.Id;
+        this.sellViewModel.Product = this.selectedProduct;
+        this.sellViewModel.UnitPrice = this.selectedProduct.Price;
     }
 
-    private async Task Produce()
+    private async Task Sell()
     {
-        await ProduceProductUseCase.ExecuteAsyn(
-            this.produceViewModel.ProductionNumber,
-            selectedProduct,
-            this.produceViewModel.QuantityToProduce,
+        await SellProductUseCase.ExecuteAsync(
+            this.sellViewModel.SalesOrderNumber,
+            this.selectedProduct,
+            this.sellViewModel.QuantityToSell,
+            this.sellViewModel.UnitPrice,
             "Frank"
             );
 
-        this.produceViewModel = new ProduceViewModel();
+        this.sellViewModel = new SellViewModel();
         this.selectedProduct = null;
     }
 }
