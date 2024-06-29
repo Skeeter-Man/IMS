@@ -43,6 +43,7 @@ builder.Services.AddTransient<ISellProductUseCase, SellProductUseCase>();
 
 // Report Use Cases
 builder.Services.AddTransient<ISearchInventoryTransactionsUseCase, SearchInventoryTransactionsUseCase>();
+builder.Services.AddTransient<ISearchProductTransactionsUseCase, SearchProductTransactionsUseCase>();
 
 
 var app = builder.Build();
