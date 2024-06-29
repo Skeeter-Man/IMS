@@ -1,7 +1,7 @@
 ﻿@page "/purchase"
 @rendermode InteractiveServer
 
-@using static IMS.WebApp.Components.Controls.Common.AutoCompleteComponent
+@inject IJSRuntime JSRuntime
 
 @inject IViewInventoriesByNameUseCases ViewInventoriesByNameUseCases
 @inject IViewInventoryByIdUseCase ViewInventoryByIdUseCase
@@ -10,7 +10,7 @@
 <h3>Purchase Inventory</h3>
 <br />
 
-<EditForm Model="purchaseViewModel" OnValidSubmit="Purchase">
+<EditForm id="purchase-form" Model="purchaseViewModel" OnValidSubmit="Purchase">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="form-group">
@@ -45,6 +45,15 @@
     private PurchaseViewModel purchaseViewModel = new PurchaseViewModel();
 
     private Inventory? selectedInventory = null;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            JSRuntime.InvokeVoidAsync("preventFormSubmission", "purchase-form");
+        }
+    }
 
     private List<ItemViewModel>? SearchInventory(string name)
     {
