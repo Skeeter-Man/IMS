@@ -20,6 +20,7 @@ namespace IMS.CoreBusiness
         [Product_EnsurePriceIsGreaterThanInventoryCost]
         public List<ProductInventory> ProductInventories { get; set; } = new List<ProductInventory>();
 
+
         public void AddInventory(Inventory inventory)
         {
             if (!this.ProductInventories.Any(
