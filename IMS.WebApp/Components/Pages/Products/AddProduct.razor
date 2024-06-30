@@ -1,5 +1,7 @@
 ﻿@page "/addproduct"
 
+@attribute [Authorize(Policy = "Inventory")]
+
 @rendermode InteractiveServer
 
 @inject IAddProductUseCase AddProductUseCase
@@ -8,7 +10,7 @@
 <h3>Add Product</h3>
 <br />
 
-<EditForm Model="product"  OnValidSubmit="Save">
+<EditForm Model="product" OnValidSubmit="Save">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="form-group">

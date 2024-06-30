@@ -1,7 +1,10 @@
 ﻿@page "/produce"
 
+@attribute [Authorize(Policy = "Productions")]
+
 @rendermode InteractiveServer
 
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime JSRuntime
 
 @inject IViewProductsByNameUseCases ViewProductsByNameUseCases
@@ -41,6 +44,13 @@
     private ProduceViewModel produceViewModel = new ProduceViewModel();
     private Product? selectedProduct;
 
+    private AuthenticationState? authState;
+
+    protected override async Task OnInitializedAsync()
+    {
+        authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    }
+
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
@@ -68,11 +78,18 @@
 
     private async Task Produce()
     {
+        string userName = string.Empty;
+
+        if (authState?.User?.Identity?.IsAuthenticated ?? false)
+        {
+            userName = authState.User.Identity.Name ?? string.Empty;
+        }
+
         await ProduceProductUseCase.ExecuteAsyn(
             this.produceViewModel.ProductionNumber,
             selectedProduct,
             this.produceViewModel.QuantityToProduce,
-            "Frank"
+            userName
             );
 
         this.produceViewModel = new ProduceViewModel();
