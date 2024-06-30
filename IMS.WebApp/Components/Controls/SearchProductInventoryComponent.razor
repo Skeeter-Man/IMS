@@ -43,7 +43,7 @@
     [Parameter]
     public EventCallback<Inventory> OnInventorySelected { get; set; }
 
-    private string _searchFilter;
+    private string _searchFilter = string.Empty;
     private string searchFilter
     {
         get => _searchFilter;
@@ -58,7 +58,9 @@
     private async Task HandleSearch()
     {
         //await Task.Delay(1000); // simulate long running call
+
         inventories = (await ViewInventoriesByNameUseCase.ExecuteAsyn(this.searchFilter)).ToList();
+
 
         StateHasChanged();
     }

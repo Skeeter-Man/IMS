@@ -10,8 +10,8 @@ namespace IMS.Plugins.InMemory
         {
             _products = new List<Product>()
             {
-                new Product { ProductId = 1, ProductName = "Bike", Quantity = 10, Price = 150 },
-                new Product { ProductId = 2, ProductName = "Car", Quantity = 10, Price = 25000 }
+                new Product { ProductId = 1, ProductName = "InMemory Bike", Quantity = 10, Price = 150 },
+                new Product { ProductId = 2, ProductName = "InMemory Car", Quantity = 5, Price = 25000 }
             };
         }
 
