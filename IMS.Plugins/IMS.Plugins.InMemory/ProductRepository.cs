@@ -20,7 +20,7 @@ namespace IMS.Plugins.InMemory
             if (_products.Any(x => x.ProductName.Equals(product.ProductName, StringComparison.OrdinalIgnoreCase)))
             { return Task.CompletedTask; }
 
-            var maxId = _products.Max(x => x.ProductId);
+            var maxId = _products.Max(x => x.ProductId) + 1;
             product.ProductId = maxId;
 
             _products.Add(product);
