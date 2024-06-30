@@ -25,8 +25,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Repositories
-builder.Services.AddSingleton<IInventoryRepository, InventoryEFCoreRepository>();
-builder.Services.AddSingleton<IProductRepository, ProductEFCoreRepository>();
+builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
+builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 builder.Services.AddSingleton<IInventoryTransactionRepository, InventoryTransactionRepository>();
 builder.Services.AddSingleton<IProductTransactionRepository, ProductTransactionRepository>();
 

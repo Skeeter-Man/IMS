@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IMS.Plugins.InMemory
 {
-    public class InventoryEFCoreTransactionRepository : IInventoryTransactionRepository
+    public class InventoryTransactionEFCoreRepository : IInventoryTransactionRepository
     {
         private readonly IDbContextFactory<IMSContext> _contextFactory;
 
-        public InventoryEFCoreTransactionRepository(IDbContextFactory<IMSContext>  contextFactory )
+        public InventoryTransactionEFCoreRepository(IDbContextFactory<IMSContext> contextFactory)
         {
             _contextFactory = contextFactory;
         }
@@ -36,7 +36,7 @@ namespace IMS.Plugins.InMemory
         {
             using var db = _contextFactory.CreateDbContext();
 
-            db.InventoryTransactions.Add(new InventoryTransaction
+            db.InventoryTransactions?.Add(new InventoryTransaction
             {
                 ProductionNumber = productionNumber,
                 InventoryId = inventory.InventoryId,
@@ -55,7 +55,7 @@ namespace IMS.Plugins.InMemory
         {
             using var db = _contextFactory.CreateDbContext();
 
-            db.InventoryTransactions.Add(new InventoryTransaction
+            db.InventoryTransactions?.Add(new InventoryTransaction
             {
                 PONumber = poNumber,
                 InventoryId = inventory.InventoryId,
